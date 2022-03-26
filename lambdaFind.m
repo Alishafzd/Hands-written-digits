@@ -1,0 +1,26 @@
+function [J_cv, lambda] = lambdaFind(nn_params, ...
+                                   input_layer_size, ...
+                                   hidden_layer_size, ...
+                                   num_labels, ...
+                                   X, y)
+%LAMBDAFIND Find the best value of lambda that minimize the J_cv
+
+% Prealocate J_cv
+J_cv = zeros(10/0.05, 1);
+
+% Calculate J values
+c = 1;
+for lambda = 0:0.05:10
+    [J, grad] = nnCostFunction(nn_params, ...
+                                   input_layer_size, ...
+                                   hidden_layer_size, ...
+                                   num_labels, ...
+                                   X, y, lambda);
+    J_cv(c) = J;
+    c = c + 1;
+end
+
+lambda = 0:0.05:10;
+
+end
+
